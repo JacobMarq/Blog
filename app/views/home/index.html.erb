@@ -1,2 +1,10 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="jumbotron">
+    <div class="container">
+        <h1>Share your voice and be heard</h1>
+        <p>Check out the articles created by users like yourself</p>
+        <br>
+        <p>
+            <%= button_to 'View All Articles', articles_path, :method => :get, :class => "btn btn-primary btn-lg" %>
+        </p>
+    </div>
+</div>
