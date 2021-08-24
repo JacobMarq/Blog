@@ -3,6 +3,8 @@
   <head>
     <title>Blog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><%= content_for?(:title) ? yield(:title) : 'The Blog-Spot' %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : 'The Blog-Spot' %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,6 +13,10 @@
   </head>
 
   <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    
     <%= yield %>
   </body>
 </html>
