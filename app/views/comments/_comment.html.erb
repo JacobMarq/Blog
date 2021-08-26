@@ -10,6 +10,7 @@
 
 <p>
     <%= link_to 'Delete Comment', [comment.article, comment],
+                :class => "btn btn-primary btn-sm btn-danger",
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %>
 </p>

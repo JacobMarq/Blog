@@ -1,0 +1,18 @@
+<div class="col-md">
+    <div class="card" style="display: inline-block">
+        <div class="card-body">
+            <h5 class="card-title">
+                <%= article.title.capitalize %>
+            </h5>
+            <p class="card-text">
+                <%= article.body[0...15].capitalize + '...' %>
+            </p>
+            <%= link_to 'Read more...', article %>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">
+                <%= 'last updated on ' + article.updated_at.to_s[6...10] + '-' + article.updated_at.to_s[0...4] %>
+            </small>
+        </div>
+    </div>
+</div>

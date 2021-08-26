@@ -1,15 +1,21 @@
 <%= link_to "Back", articles_path, :class => "btn btn-primary btn-sm" %>
 
-<h1> <%= @article.title %> </h1>
+<div>
+    <h1> <%= @article.title.capitalize %> </h1>
 
-<p> <%= @article.body %> </p>
+    <ul>
+        <li><%= link_to "Edit", edit_article_path(@article),
+                        :class => "btn btn-primary btn-sm" %>
+        </li>
 
-<ul>
-    <li><%= link_to "Edit Post", edit_article_path(@article) %></li>
-    <li><%= link_to "Delete Post", article_path(@article),
-                    method: :delete,
-                    data: { confirm: "Are you sure?" }%></li>
-</ul>
+        <li><%= link_to "Delete", article_path(@article),
+                        :class => "btn btn-primary btn-sm btn-danger",
+                        method: :delete,
+                        data: { confirm: "Are you sure?" }%>
+        </li>
+    </ul>
+</div>
+<p> <%= @article.body.capitalize %> </p>
 
 <h2>Comments</h2>
 <%= render @article.comments %>

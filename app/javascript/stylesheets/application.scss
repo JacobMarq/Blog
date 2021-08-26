@@ -1,8 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 
-$white: white;
-$black: black;
+$white: #fff;
+$black: #000;
 
 .navbar {
     margin-bottom: 0;
@@ -17,9 +17,12 @@ h1,
 h2 {
     font-weight: bold;
 }
+h5 {
+    color: $black
+}
 p {
     font-size: 16px;
-    color: $white;
+    color: $black;
 }
 a:visited {
     color: $black;
@@ -54,4 +57,65 @@ audio {
 caption {
     float: left;
     clear: both;
+}
+
+/* ==============
+    DropDown
+===============*/
+
+.ham-toggle{
+    display: flex;
+    text-decoration: none;
+    height: 2.5rem;
+    width: 3rem;
+    flex-shrink: 0;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;   
+}
+.ham-toggle:hover,
+.ham-toggle:focus{
+    background-color: #666;
+}
+.ham-toggle span{
+    width: 2rem;
+    height: .2rem;
+    background-color: white;
+    position: relative !important;
+    transition: all ease-in-out .25s;
+}
+.ham-toggle span::before{
+    position: absolute;
+    content: '';
+    width: 2rem;
+    height: .2rem;
+    left: 0;
+    background-color: white;
+    top: -8px;
+    transition: all ease-in-out .25s;
+    box-sizing: inherit;
+}
+.ham-toggle span::after{
+    position: absolute;
+    content: '';
+    width: 2rem;
+    height: .2rem;
+    left: 0;
+    background-color: white;
+    top: 8px;
+    transition: all ease-in-out .25s;
+    box-sizing: inherit;
+}
+.ham-toggle.toggle-active span{
+    background-color: transparent;
+}
+.ham-toggle.toggle-active span:before,
+ .ham-toggle.toggle-active span:after {
+    top: 0;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.ham-toggle.toggle-active span:after{
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
 }
