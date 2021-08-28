@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+ .article_header {
+    color: #000
+ }

@@ -1,18 +1,18 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
-    <p>
-        <%= form.label :user %>
-        <%= form.text_field :commenter %>
-    </p>
-    <p>
-        <%= form.label :comment %>
-        <%= form.text_area :body %>
-    </p>
-    <p>
-        <%= form.label :status %><br>
-        <%= form.select :status, ['public', 'private', 'archived'],
-        selected: 'public' %>
-    </p>
-    <p>
+    
+    <div class="row">
+        <div class="col-2">
+            <img src="" style="height: 60px; width: 60px">
+        </div>
+        <p class="col-10" style="display: flex; flex-direction: column">
+            <%= form.text_field :commenter, :value => 'John Smith', :placeholder => 'username' %>
+            <%= form.text_area :body, :placeholder => 'Add a comment...' %>
+        </p>
+    </div>
+
+    <%= form.hidden_field :status, :value => 'public' %>
+
+    <p class="justify-content-end" style="display: flex" >
         <%= form.submit %>
     </p>
 <% end %>
