@@ -1,0 +1,33 @@
+<div style="display: flex; flex-direction: row; align-items: start; padding:0">
+    <div class="col-2 mb-0" style="margin: 0">
+        <img src="" class="border border-dark rounded-circle" style="height: 60px; width: 60px; margin: 0">
+    </div>
+    
+    <div class="col-10" style="flex-direction: column">
+        <div class="h-25 row d-flex mb-0" style="justify-content: space-between; padding: 0">
+            <div class="col-11 row">
+                <p class="card-text mb-0 w-auto mw-50 d-flex"><%= comment.commenter %></p>
+                <p class="text-muted col-4 mb-0 w-auto mw-50"><%= comment.updated_at.pretty %></p>
+            </div>
+
+            <div class="col-1 d-flex justify-content-end my-0" style="padding-right: 0">
+                <%= link_to '', [comment.article, comment],
+                        :class => "btn btn-primary btn-sm btn-danger bi bi-x-square",
+                        :style => "font-size: 1rem; height: 28px; width: 27px; padding: 0;",
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+            </div>
+        </div>
+
+        <p class="mb-0">
+            <%= comment.body %>
+        </p>
+        
+        <p><button style="padding: 0" class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">
+        Reply</button></p>
+
+        <div id="reply<%= comment.id %>" class="collapse" aria-labelledby="comment<%= comment.id %>" data-parent="#commentAccordion">
+            <%= render "comments/replies/form", comment: comment %>
+        </div>
+    </div>
+</div>

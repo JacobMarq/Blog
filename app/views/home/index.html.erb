@@ -4,6 +4,11 @@
         <p>Check out the articles created by users like yourself</p>
         <br>
 
+        <div>
+            <%= render "home/carousel" %>
+        </div>
+        <br>
+
         <p>
             <%= button_to 'View All Articles', articles_path, :method => :get, :class => "btn btn-primary btn-lg" %>
         </p>

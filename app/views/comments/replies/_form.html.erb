@@ -5,12 +5,19 @@
             <img src="" class="border border-dark rounded-circle" style="height: 60px; width: 60px">
         </div>
         <p class="col-10" style="display: flex; flex-direction: column">
-            <%= form.text_field :commenter, :value => 'John Smith', :placeholder => 'username' %>
-            <%= form.text_area :body, :placeholder => 'Add a comment...' %>
+            <%= form.text_field :commenter, :value => 'John Appleseed', :placeholder => 'username' %>
+            
+            <% if comment.subject_id.nil? %>
+                <%= form.text_area :body, :placeholder => 'Add a reply...' %>
+            <% else %>
+                <%= form.text_area :body, :value => "@#{comment.commenter}: " %>
+            <% end %>
         </p>
     </div>
 
     <%= form.hidden_field :status, :value => 'public' %>
+
+    <%= form.hidden_field :subject_id, :value => comment.id %>
 
     <p class="justify-content-end" style="display: flex" >
         <%= form.submit %>

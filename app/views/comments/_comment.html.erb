@@ -1,29 +1,47 @@
-<% if comment.id != nil %>
-    <li class="list-group-item row">
+<% if comment.id != nil && comment.subject_id.nil? %>
+    <li class="list-group-item row" id="comment<%= comment.id %>">
         <div style="display: flex; flex-direction: row; align-items: start; padding:0">
-            <div class="col-2" style="margin: 0">
-                <img src="" style="height: 60px; width: 60px; margin: 0">
+            <div class="col-2 mb-0" style="margin: 0">
+                <img src="" class="border border-dark rounded-circle" style="height: 60px; width: 60px; margin: 0">
             </div>
             
             <div class="col-10" style="flex-direction: column">
-                <div class="row" style="justify-content: space-between; padding: 0">
+                <div class="h-25 row d-flex mb-0" style="justify-content: space-between; padding: 0">
                     <div class="col-11 row">
-                        <p class="card-title" style="display: flex; width: auto; max-width: 50%"><%= comment.commenter %></p>
-                        <p class="text-muted col-4"><%= comment.updated_at.pretty %></p>
+                        <p class="card-text mb-0 w-auto mw-50 d-flex"><%= comment.commenter %></p>
+                        <p class="text-muted col-4 mb-0 w-auto mw-50"><%= comment.updated_at.pretty %></p>
                     </div>
 
-                    <div class="col-1">
+                    <div class="col-1 d-flex justify-content-end my-0" style="padding-right: 0">
                         <%= link_to '', [comment.article, comment],
                                 :class => "btn btn-primary btn-sm btn-danger bi bi-x-square",
-                                :style => "font-size: 1rem; height: 28px; width: 27px; padding: 0",
+                                :style => "font-size: 1rem; height: 28px; width: 27px; padding: 0;",
                                 method: :delete,
                                 data: { confirm: 'Are you sure?' } %>
                     </div>
                 </div>
 
-                <p>
+                <p class="mb-0">
                     <%= comment.body %>
                 </p>
+                
+                <p><button style="padding: 0" class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">
+                Reply</button></p>
+
+                <div id="reply<%= comment.id %>" class="collapse" aria-labelledby="comment<%= comment.id %>" data-parent="#commentAccordion">
+                    <%= render "comments/replies/form", comment: comment %>
+                </div>
+
+                <% if comment.replies.count != 0 %>
+                    <button style="padding: 0" class="btn btn-link btn-block text-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#replies<%= comment.id %>" aria-expanded="false" aria-controls="replies<%= comment.id %>">
+                    View <%= Comment.thread_length(comment) %> replies</button>
+
+                    <div id="replies<%= comment.id %>" class="collapse" aria-labelledby="comment<%= comment.id %>" data-parent="#commentAccordion">
+                        <% Comment.thread(comment).each do |reply| %>
+                            <%= render( :partial => "comments/replies/reply", :locals => { :comment => reply } ) %>
+                        <% end %>
+                    </div>
+                <% end %>
             </div>
         </div>    
     </li>

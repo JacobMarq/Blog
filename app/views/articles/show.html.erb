@@ -3,7 +3,7 @@
 <div class="card">
     <nav class="card-header navbar navbar-light bg-light">
         <h1 class="article_header mb-0 col-8"> <%= @article.title.capitalize %> </h1>
-        <div class="col-md-2 align-self-start flex-column">
+        <div class="d-flex col-md-2 align-self-start flex-row justify-content-end">
             <%= link_to "", edit_article_path(@article),
                         :style => "font-size: 1.3rem; margin-right: 5px",
                         :class => "btn btn-primary btn-sm bi bi-pencil-square" %>
@@ -15,6 +15,11 @@
                         data: { confirm: "Are you sure?" }%>
         </div>
     </nav>
+            <% if @article.cover.attached? %>
+                <img src="<%= url_for(@article.cover) %>" class="card-img" alt="cover">
+            <% else %>
+                <img >
+            <% end %>
     <div class="card-body">
         <p> <%= @article.body.capitalize %> </p>
     </div>
@@ -31,7 +36,7 @@
     </div>
     <div class="card-body">
         <%= render "comments/form" %>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush accordion" id="commentAccordion">
             <%= render @article.comments %>
         </ul>
     </div>
