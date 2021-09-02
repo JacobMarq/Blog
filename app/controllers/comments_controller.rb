@@ -8,7 +8,17 @@ class CommentsController < ApplicationController
     def destroy
         @article = Article.find(params[:article_id])
         @comment = @article.comments.find(params[:id])
-        @comment.destroy
+        
+        if @comment.replies.nil?
+            @comment.destroy
+        else
+            @comment.replies.each do |reply|
+                reply.update(:subject_id => @comment.subject_id)
+            end
+
+            @comment.destroy
+        end
+
         redirect_to article_path(@article)
     end
 
