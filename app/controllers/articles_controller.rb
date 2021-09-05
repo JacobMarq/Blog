@@ -1,13 +1,21 @@
 class ArticlesController < ApplicationController
+  def favorite
+    @article = Article.find(params[:id])
+    UserArticle.create(user_id: current_user.id, article_id: @article.id)
+  end
+  
+  def like
+    @article = Article.find(params[:id])
+    Like.create(user_id: current_user.id, article_id: @article.id)
+  end
+
+  def dislike
+    @article = Article.find(params[:id])
+    Dislike.create(user_id: current_user.id, article_id: @article.id)
+  end
+  
   def index(sorting = :id)
     @articles = Article.paginate(page: params[:page], per_page: 4)
-    # @articles = Article.all
-    # if sorting === :id
-    #   @articles
-    # end
-
-    
-
   end
 
   def show

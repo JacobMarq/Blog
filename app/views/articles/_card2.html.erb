@@ -1,6 +1,6 @@
 <div class="col-md-8 float-md-start">
     <% if article.cover.attached? %>
-        <a href="/articles/<%= article.id %>">
+        <a href="/articles/<%= article.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
             <img src="<%= url_for(article.cover) %>" class="d-block my-0 w-100 mw-100 rounded-3" style="aspect-ratio: 16/9">
         </a>
     <% else %>

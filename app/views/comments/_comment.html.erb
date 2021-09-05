@@ -5,7 +5,10 @@
                         :class => "position-absolute top-0 end-0 btn btn-primary btn-sm btn-danger bi bi-trash",
                         :style => "font-size: 1rem; height: 28px; width: 27px; padding: 0",
                         method: :delete,
-                        data: { confirm: 'Are you sure?' } %>
+                        data: { confirm: 'Are you sure?' },
+                        :data_bs_toggle =>"tooltip",
+                        :data_bs_placement => "bottom",
+                        :title => "Delete" %>
 
             <img src="" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
             
@@ -21,8 +24,11 @@
                     <%= comment.body %>
                 </p>
                 
-                <p><button class="btn btn-link btn-block text-left text-decoration-none collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">
-                Reply</button></p>
+                <div>
+                    <button class="btn btn-sm bi bi-hand-thumbs-up" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Like"> 0<%# @article.likes.count %></button>
+                    <button class="btn btn-sm bi bi-hand-thumbs-down" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Dislike"> 0<%# @article.dislikes.count %></button>
+                    <button class="btn btn-link btn-block text-left text-decoration-none collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">Reply</button>
+                </div>
 
                 <div id="reply<%= comment.id %>" class="collapse" aria-labelledby="comment<%= comment.id %>" data-parent="#commentAccordion">
                     <%= render "comments/replies/form", comment: comment %>

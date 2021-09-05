@@ -4,17 +4,23 @@
     <nav class="card-header navbar navbar-light bg-light">
         <h1 class="article_header mb-1 col-8 border-bottom"> <%= @article.title.capitalize %> </h1>
         <div class="d-flex col-md-3 align-self-start flex-row justify-content-end">
-            <a class="bi bi-heart btn btn-primary btn-sm" style="font-size: 1.3rem; margin-right: 5px"></a>
+            <a class="bi bi-heart btn btn-primary btn-sm" style="font-size: 1.3rem; margin-right: 5px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Favorite"></a>
             
             <%= link_to "", edit_article_path(@article),
                         :style => "font-size: 1.3rem; margin-right: 5px",
-                        :class => "btn btn-primary btn-sm bi bi-pencil-square" %>
+                        :class => "btn btn-primary btn-sm bi bi-pencil-square",
+                        :data_bs_toggle =>"tooltip",
+                        :data_bs_placement => "bottom",
+                        :title => "Edit"%>
 
             <%= link_to "", article_path(@article),
                         :class => "btn btn-primary btn-sm btn-danger bi bi-trash",
                         :style => "font-size: 1.3rem",
                         method: :delete,
-                        data: { confirm: "Are you sure?" }%>
+                        data: { confirm: "Are you sure?" },
+                        :data_bs_toggle =>"tooltip",
+                        :data_bs_placement => "bottom",
+                        :title => "Delete"%>
         </div>
         <div class="my-2 d-inline-flex align-bottom">
             <img src="" class="border border-dark rounded-circle" style="height: 40px; width: 40px; margin: 0; aspect-ratio: 1/1">
@@ -33,10 +39,8 @@
     <div class="card-body text-dark">
         <p> <%= @article.body.capitalize %> </p>
         <div>
-            <button class="btn-sm bi bi-hand-thumbs-up"></button>
-                <%# @article.likes.count %>
-            <button class="btn-sm bi bi-hand-thumbs-down"></button>
-                <%# @article.dislikes.count %>
+            <button class="btn btn-sm bi bi-hand-thumbs-up" style="font-size: 1.3rem" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Like"> 0<%# @article.likes.count %></button>
+            <button class="btn btn-sm bi bi-hand-thumbs-down" style="font-size: 1.3rem" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Dislike"> 0<%# @article.dislikes.count %></button>
         </div>
     </div>
     

@@ -1,4 +1,16 @@
 class CommentsController < ApplicationController
+    def like
+        @article = Article.find(params[:id])
+        @comment = @article.comments.find(params[:id])
+        Like.create(user_id: current_user.id, comment_id: @comment.id)
+    end
+    
+    def dislike
+        @article = Article.find(params[:id])
+        @comment = @article.comments.find(params[:id])
+        Dislike.create(user_id: current_user.id, comment_id: @comment.id)
+    end
+    
     def create
         @article = Article.find(params[:article_id])
         @comment = @article.comments.create(comment_params)
