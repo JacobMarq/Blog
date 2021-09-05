@@ -1,9 +1,11 @@
-<%= link_to "Back", articles_path, :class => "btn btn-primary btn-sm", :style => "margin-top: .7em" %>
+<%= link_to " Back", articles_path, :class => "btn btn-primary btn-sm bi bi-box-arrow-left", :style => "margin-top: .7em; font-size: 1.3rem" %>
     
-<div class="card">
+<div class="card border-0 shadow">
     <nav class="card-header navbar navbar-light bg-light">
-        <h1 class="article_header mb-0 col-8"> <%= @article.title.capitalize %> </h1>
-        <div class="d-flex col-md-2 align-self-start flex-row justify-content-end">
+        <h1 class="article_header mb-1 col-8 border-bottom"> <%= @article.title.capitalize %> </h1>
+        <div class="d-flex col-md-3 align-self-start flex-row justify-content-end">
+            <a class="bi bi-heart btn btn-primary btn-sm" style="font-size: 1.3rem; margin-right: 5px"></a>
+            
             <%= link_to "", edit_article_path(@article),
                         :style => "font-size: 1.3rem; margin-right: 5px",
                         :class => "btn btn-primary btn-sm bi bi-pencil-square" %>
@@ -14,24 +16,37 @@
                         method: :delete,
                         data: { confirm: "Are you sure?" }%>
         </div>
+        <div class="my-2 d-inline-flex align-bottom">
+            <img src="" class="border border-dark rounded-circle" style="height: 40px; width: 40px; margin: 0; aspect-ratio: 1/1">
+            <div class="col-10 ms-3 align-self-center">
+                <p class="text-muted fs-6 mb-0">John Hernandez</p>
+            </div>
+        </div>
     </nav>
-            <% if @article.cover.attached? %>
-                <img src="<%= url_for(@article.cover) %>" class="card-img" alt="cover">
-            <% else %>
-                <img >
-            <% end %>
-    <div class="card-body">
+    
+    <% if @article.cover.attached? %>
+        <img src="<%= url_for(@article.cover) %>" class="card-img my-0 mw-100" alt="cover">
+    <% else %>
+        <p class="text-muted d-block my-0"></p>
+    <% end %>
+
+    <div class="card-body text-dark">
         <p> <%= @article.body.capitalize %> </p>
+        <div>
+            <button class="btn-sm bi bi-hand-thumbs-up"></button>
+                <%# @article.likes.count %>
+            <button class="btn-sm bi bi-hand-thumbs-down"></button>
+                <%# @article.dislikes.count %>
+        </div>
     </div>
+    
     <div class="card-footer text-muted">
         <%= 'last updated ' + @article.updated_at.pretty %>
     </div>
 </div>
 
-<br>
-
-<div class="card">
-    <div class="card-header">
+<div class="card mt-2 border-0">
+    <div class="card-header border-0">
         <h2 class ="article_header mb-0">Comments: <%= @article.comments.count %></h2>
     </div>
     <div class="card-body">

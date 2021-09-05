@@ -1,10 +1,30 @@
-<% @articles.each do |article| %>
-    <div class="row justify-content-center">
-      <%= render( :partial => "articles/article_card", :locals => { :article => article } ) %>
+<%= link_to " Back", home_index_path, :class => "btn btn-primary btn-sm bi bi-box-arrow-left", :style => "margin-top: .7em; font-size: 1.3rem" %>
+
+<% @articles = Article.paginate(page: params[:page], per_page: 4).order('created_at DESC') %>
+<% temp_articles = @articles %>
+
+<% if @articles.current_page == 1 %>
+  <div class="d-flex justify-content-center">
+    <div class="border-bottom">
+        <h1 class="text-center text-dark">Most Recent</h1>
+    </div>
+  </div>
+  <div class="row py-3 border-bottom">
+    <div class="shadow p-0 mb-4">
+      <%= render( :partial => "articles/card2", :locals => { :article => temp_articles[0] } ) %>
+    </div>
+  </div>
+<% end %>
+
+<% temp_articles = temp_articles.drop(1) if @articles.current_page == 1 %>
+
+<% temp_articles.each do |article| %>
+    <div class="row justify-content-center mt-2">
+      <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
     </div>
 <% end %>
 
-<p class="text-center" style="color: white; margin-bottom: .2em"><%= page_entries_info @articles %></p>
+<p class="text-center text-muted" style="margin-bottom: .2em"><%= page_entries_info @articles %></p>
 <%= will_paginate @article, list_classes: %w(custom_pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 
 <div class="d-flex gap-2 justify-content-center">

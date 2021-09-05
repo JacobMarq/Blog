@@ -1,0 +1,29 @@
+<div class="card mb-3 shadow border-0 bg-light" style="display: inline-block">
+    <div class="row no-gutters">
+        <div class="col-md-4 p-0 align-items-center d-flex justify-content-center">
+            <% if article.cover.attached? %>
+                <a href="/articles/<%= article.id %>">
+                    <img src="<%= url_for(article.cover) %>" class="card-img mw-100 h-100 my-0 rounded border" alt="cover">
+                </a>
+            <% else %>
+                <p class="text-muted d-block my-0">No photo to load...</p>
+            <% end %>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <a href="/articles/<%= article.id %>" class="fs-5 text-decoration-none fw-bold title-link">
+                    <%= article.title.capitalize %>
+                </a>
+                <p class="card-text" style="color: #222">
+                    <%= article.body[0...55].capitalize + '...' %>
+                </p>
+                <%= link_to 'Read more...', article, :class => "title-link text-decoration-none" %>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    <%= 'last updated ' + article.updated_at.pretty %>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>

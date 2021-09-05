@@ -1,9 +1,9 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
     
-    <div class="row">
-        <div class="col-2">
-            <img src="" class="border border-dark rounded-circle" style="height: 60px; width: 60px">
-        </div>
+    <div class="d-flex flex-row align-items-start p-0 mt-1">
+
+        <img src="" class="border border-dark rounded-circle me-auto" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+
         <p class="col-10" style="display: flex; flex-direction: column">
             <%= form.text_field :commenter, :value => 'John Smith', :placeholder => 'username' %>
             <%= form.text_area :body, :placeholder => 'Add a comment...' %>

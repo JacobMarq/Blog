@@ -1,36 +1,45 @@
 <%= form_with model: article do |form| %>
-    <div>
-        <%= form.label "Cover Art" %><br>
-        <%= form.file_field :cover %>
-    </div>
-    <br>
+    <% if flash[:error]%>
+        <div class="alert alert-warning"><%= flash[:error] %></div>
+    <% elsif flash[:success] %>
+        <div class="alert alert-success"><% flash[:success] %></div>
+    <% end %>
+    <div class="container rounded-3 border shadow">
+        <br>
+        <div class="text-dark">
+            <%= form.label "Cover Art" %><br>
+            <%= form.file_field :cover %>
+        </div>
+        <br>
 
-    <div class="d-flex" style="flex-direction: column">
-        <%= form.label :title %>
-        <%= form.text_field :title, :class => 'w-100' %>
-        <% article.errors.full_messages_for(:title).each do |message|%>
-            <div class="text-warning"><%= message %></div>
-        <% end %>
-    </div>
-    <br>
+        <div class="d-flex text-dark" style="flex-direction: column">
+            <%= form.label :title %>
+            <%= form.text_field :title, :class => 'w-100', :placeholder => 'Enter title...' %>
+            <% article.errors.full_messages_for(:title).each do |message|%>
+                <div class="text-danger"><%= message %></div>
+            <% end %>
+        </div>
+        <br>
 
-    <div class="d-flex" style="flex-direction: column">
-        <%= form.label :body %><br>
-        <%= form.text_area :body, :class => 'w-100' %>
-        <% article.errors.full_messages_for(:body).each do |message|%>
-            <div class="text-warning"><%= message %></div>
-        <% end %>
-    </div>
-    <br>
+        <div class="d-flex text-dark" style="flex-direction: column">
+            <%= form.label :body %><br>
+            <%= form.text_area :body, :class => 'w-100', :placeholder => 'Body must be atleast 10 characters...' %>
+            <% article.errors.full_messages_for(:body).each do |message|%>
+                <div class="text-danger"><%= message %></div>
+            <% end %>
+        </div>
+        <br>
 
-    <div class="d-flex col-2" style="flex-direction: column">
-        <%= form.label :status %><br>
-        <%= form.select :status, ['public', 'private', 'archived'],
-                        selected: 'public' %>
-    </div>
-    <br>
+        <div class="d-flex col-2 text-dark" style="flex-direction: column">
+            <%= form.label :status %><br>
+            <%= form.select :status, ['public', 'private', 'archived'],
+                            selected: 'public' %>
+        </div>
+        <br>
 
-    <div>
-        <%= form.submit %>
+        <div>
+            <%= form.submit %>
+        </div>
+        <br>
     </div>
 <% end %>

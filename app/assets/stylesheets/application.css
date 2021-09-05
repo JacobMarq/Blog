@@ -14,6 +14,39 @@
  *= require_self
  */
 
- .article_header {
-    color: #000
- }
+.article_header {
+   color: #000
+}
+
+.title-link:hover {
+   color: rgb(124, 124, 124)
+}
+
+.link-custom-grey {
+   color: rgb(116, 116, 116)
+}
+
+.link-custom-grey:hover,
+.link-custom-grey:focus {
+   color: #000
+}
+
+.link-custom-grey:visited {
+   color: #777
+}
+
+a.bi-trash {
+   color: #222
+}
+
+a.bi-pencil-square {
+   color: #222
+}
+
+a.bi-heart {
+   color: #222
+}
+
+a.bi-heart:hover {
+   color: #fff
+}

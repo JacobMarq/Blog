@@ -1,17 +1,17 @@
 <div class="container-fluid">
-    <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+    <nav class="navbar navbar-light bg-light navbar-expand-md">
         <%= link_to "The Blog-Spot", root_path, class: 'navbar-brand' %>
         <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#exploreBlog" aria-controls="exploreBlog" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="navbar-collapse collapse" id="exploreBlog">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav nav">
                 <li class="nav-item">
-                    <%= link_to 'Home', home_index_path, class: "nav-link", "aria-current" => "page" %>
+                    <a class="nav-link" href="/home/index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <%= link_to 'Articles', articles_path, class: "nav-link" %>
+                    <a class="nav-link" href="/articles">Articles</a>
                 </li>
             </ul>
         </div>

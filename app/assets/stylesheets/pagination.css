@@ -11,12 +11,12 @@
     .custom_pagination a, .custom_pagination span, .custom_pagination li {
       padding: 0.1em 0.5em; }
     .custom_pagination li.page-item.disabled .page-link {
-      color: #aaaaaa; }
+      color: #bebebe; }
     .custom_pagination li.page-item.active .page-link {
       z-index: 3;
       font-style: normal;
       font-weight: bold;
-      color: #bebebe; }
+      color: #f1f1f1; }
     .custom_pagination a {
       border: 1px solid #dddddd;
       color: #0063dc;

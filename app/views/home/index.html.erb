@@ -1,16 +1,28 @@
-<div class="jumbotron">
-    <div class="container">
-        <h1>Share your voice and be heard</h1>
-        <p>Check out the articles created by users like yourself</p>
-        <br>
+<div class="jumbotron bg-dark shadow">
+    <h1>Share your voice and be heard</h1>
+    <p class="jb-text">Check out the articles created by users like yourself</p>
+</div>
 
-        <div>
-            <%= render "home/carousel" %>
-        </div>
-        <br>
-
-        <p>
-            <%= button_to 'View All Articles', articles_path, :method => :get, :class => "btn btn-primary btn-lg" %>
-        </p>
+<br>
+<div class="d-flex justify-content-center">
+    <div class="border-bottom">
+        <h1 class="text-center text-dark">Top Articles</h1>
     </div>
+</div>
+<br>
+
+<div class="container d-flex flex-column align-items-center">
+    <div class="shadow" style="max-height: 450px !important; max-width: 1100px !important">
+        <% @articles = Article.all %>
+        <% if @articles.length < 3 %>
+            <% "No articles to render" %>
+        <% else %>
+            <%= render( :partial => "home/carousel", :locals => { :articles => @articles } )%>
+        <% end %>
+    </div>
+    <br>
+
+    <p>
+        <%= button_to 'View All Articles', articles_path, :method => :get, :class => "btn btn-primary btn-lg" %>
+    </p>
 </div>
