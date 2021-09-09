@@ -23,8 +23,12 @@
         </p>
         
         <div>
-            <button class="btn btn-sm bi bi-hand-thumbs-up" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Like"> 0<%# @article.likes.count %></button>
-            <button class="btn btn-sm bi bi-hand-thumbs-down" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Dislike"> 0<%# @article.dislikes.count %></button>
+            <%= link_to ' ' + comment.likes.count.to_s, like_comment_url(:article_id => comment.article_id, :id => comment.id),
+                        :class => "btn btn-sm bi bi-hand-thumbs-up",
+                        :method => :put %>
+            <%= link_to ' ' + comment.dislikes.count.to_s, dislike_comment_url(:article_id => comment.article_id, :id => comment.id),
+                        :class => "btn btn-sm bi bi-hand-thumbs-down",
+                        :method => :put %>
             <button class="btn btn-link btn-block text-left text-decoration-none collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">Reply</button>
         </div>
 

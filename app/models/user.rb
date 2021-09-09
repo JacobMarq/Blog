@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :omniauthable
 
+  has_one_attached :avi
+
   has_many :articles
   has_many :comments
 
@@ -15,6 +17,8 @@ class User < ApplicationRecord
   has_many :followed, through: :followers
   has_many :followed, foreign_key: :followed_id, class_name: "Friendship"
   has_many :followers, through: :followed
+
+  validates :username, presence: true, length: { maximum: 25, too_long: "may not exceed %{count} characters" }
 
   def add_favorite(article)
     if self.favorites.where(id: article.id).empty?

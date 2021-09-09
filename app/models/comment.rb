@@ -12,11 +12,19 @@ class Comment < ApplicationRecord
   validates :body, presence: true, length: { minimum: 1, too_short: "must contain atleast %{count} characters", maximum: 200 , too_long: "may not exceed %{count} characters"}
 
   def liked?(user)
-      !!self.likes.find{|like| like.user_id == user.id}
+    !!self.likes.find{|like| like.user_id == user.id}
+  end
+
+  def select_user_like(user)
+    like = !!self.likes.select{|like| return like if like.user_id == user.id}
   end
 
   def disliked?(user)
-      !!self.dislikes.find{|dislike| like.user_id == user.id}
+    !!self.dislikes.find{|dislike| dislike.user_id == user.id}
+  end
+
+  def select_user_dislike(user)
+    dislike = !!self.dislikes.select{|dislike| return dislike if dislike.user_id == user.id}
   end
   
   def self.thread_length(comment)

@@ -1,0 +1,24 @@
+<div class="card mb-3 shadow border-0 bg-light" style="display: inline-block">
+    <div class="row no-gutters">
+        <div class="col-md-4 p-0 align-items-center d-flex justify-content-center">
+            <% if @user.avi.attached? %>
+                <a href="/users/<%= @user.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
+                    <img src="<%= url_for(@user.avi) %>" class="card-img mw-100 h-100 my-0 rounded border" alt="cover">
+                </a>
+            <% else %>
+                <p class="text-muted d-block my-0">No photo to load...</p>
+            <% end %>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <a href="/users/<%= @user.id %>" class="fs-5 text-decoration-none fw-bold title-link">
+                    <%= @user.username.capitalize %>
+                </a>
+                <p class="card-text" style="color: #222">
+                    <%= @user.username.capitalize %>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
