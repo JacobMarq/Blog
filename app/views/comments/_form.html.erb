@@ -5,12 +5,15 @@
         <img src="" class="border border-dark rounded-circle me-auto" style="height: 60px; width: 60px; aspect-ratio: 2/2">
 
         <p class="col-10" style="display: flex; flex-direction: column">
-            <%= form.text_field :commenter, :value => 'John Smith', :placeholder => 'username' %>
             <%= form.text_area :body, :placeholder => 'Add a comment...' %>
         </p>
     </div>
 
     <%= form.hidden_field :status, :value => 'public' %>
+
+    <% if signed_in? %>
+        <%= form.hidden_field :user_id, :value => current_user.id %>
+    <% end %>
 
     <p class="justify-content-end" style="display: flex" >
         <%= form.submit %>

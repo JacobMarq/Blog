@@ -12,9 +12,17 @@
         <a href="/articles/<%= article.id %>" class="fs-3 text-decoration-none fw-bolder title-link"><%= article.title.capitalize %></a>
     </div>
     <div class="d-flex my-3">
-        <img src="" class="border border-dark rounded-circle" style="height: 40px; width: 40px; margin: 0; aspect-ratio: 2/2">
+        
+        <% if article.user.nil? %>
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2"%>
+        <% elsif article.user.avi != nil %>
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2"%>
+        <% else %>
+            <img src="<%= url_for(article.user.avi) %>" class="border border-dark rounded-circle m-0" style="height: 40px; width: 40px; aspect-ratio: 2/2">
+        <% end %>
+
         <div class="col-10 ms-3 align-self-center">
-            <p class="text-muted fs-6 mb-0">John Hernandez</p>
+            <p class="text-muted fs-6 mb-0"><%= article.user.username.capitalize unless article.user.nil? %></p>
         </div>
     </div>
 </div>

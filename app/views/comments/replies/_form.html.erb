@@ -4,15 +4,17 @@
         <img src="" class="block border border-dark rounded-circle me-auto" style="height: 60px; width: 60px; aspect-ratio: 2/2">
         
         <p class="col-10 d-flex flex-column">
-            <%= form.text_field :commenter, :value => 'John Appleseed', :placeholder => 'username' %>
-            
             <% if comment.subject_id.nil? %>
                 <%= form.text_area :body, :placeholder => 'Add a reply...' %>
             <% else %>
-                <%= form.text_area :body, :value => "@#{comment.commenter}: " %>
+                <%= form.text_area :body, :value => "@#{comment.user.username if comment.user != nil}: " %>
             <% end %>
         </p>
     </div>
+
+    <% if signed_in? %>
+        <%= form.hidden_field :user_id, :value => current_user.id %>
+    <% end %>
 
     <%= form.hidden_field :status, :value => 'public' %>
 

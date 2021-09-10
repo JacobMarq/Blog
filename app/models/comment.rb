@@ -7,8 +7,7 @@ class Comment < ApplicationRecord
   has_many :replies, class_name: "Comment", foreign_key: "subject_id"
   has_many :likes
   has_many :dislikes
-  
-  validates :commenter, presence: true
+
   validates :body, presence: true, length: { minimum: 1, too_short: "must contain atleast %{count} characters", maximum: 200 , too_long: "may not exceed %{count} characters"}
 
   def liked?(user)

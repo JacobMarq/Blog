@@ -1,19 +1,27 @@
 <div class="d-flex flex-row align-items-start p-0 my-1 position-relative">
-    <%= link_to '', [comment.article, comment],
-                        :class => "position-absolute top-0 end-0 btn btn-primary btn-sm btn-danger bi bi-trash",
-                        :style => "font-size: 1rem; height: 28px; width: 27px; padding: 0;",
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' },
-                        :data_bs_toggle =>"tooltip",
-                        :data_bs_placement => "bottom",
-                        :title => "Delete" %>
+    <% if comment.user == current_user %>
+        <%= link_to '', [comment.article, comment],
+                            :class => "position-absolute top-0 end-0 btn btn-primary btn-sm btn-danger bi bi-trash",
+                            :style => "font-size: 1rem; height: 28px; width: 27px; padding: 0;",
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' },
+                            :data_bs_toggle =>"tooltip",
+                            :data_bs_placement => "bottom",
+                            :title => "Delete" %>
+    <% end %>
 
-    <img src="" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+    <% if comment.user.nil? %>
+        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
+    <% elsif comment.user.avi.nil? %>
+        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
+    <% else %>
+        <img src="<%= url_for(comment.user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+    <% end %>
 
     <div class="col-md-10 flex-column">
         <div class="h-25 d-flex flex-row mb-0 p-0">
             <div class="row me-3">
-                <p class="card-text mb-0 w-auto mw-50 d-flex"><%= comment.commenter %></p>
+                <p class="card-text mb-0 w-auto mw-50 d-flex"><%= comment.user.username.capitalize if comment.user != nil %></p>
                 <p class="text-muted col-4 mb-0 w-auto mw-50"><%= comment.updated_at.pretty %></p>
             </div>
         </div>

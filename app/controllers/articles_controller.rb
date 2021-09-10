@@ -1,17 +1,35 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!, except: [:index,  :show]
+    
+  def like
+      @article = Article.find(params[:id])
+      if @article.liked?(current_user)
+          @like = @article.select_user_like(current_user)
+          @like.destroy
+          return
+      elsif @article.disliked?(current_user)
+          @dislike = @article.select_user_dislike(current_user)
+          @dislike.destroy
+      end
+      Like.create(user_id: current_user.id, article_id: @article.id)
+  end
+  
+  def dislike
+      @article = Article.find(params[:id])
+      if @article.disliked?(current_user)
+          @dislike = @article.select_user_dislike(current_user)
+          @dislike.destroy
+          return
+      elsif @article.liked?(current_user)
+          @like = @article.select_user_like(current_user)
+          @like.destroy
+      end
+      Dislike.create(user_id: current_user.id, article_id: @article.id)
+  end
+  
   def favorite
     @article = Article.find(params[:id])
     UserArticle.create(user_id: current_user.id, article_id: @article.id)
-  end
-  
-  def like
-    @article = Article.find(params[:id])
-    Like.create(user_id: current_user.id, article_id: @article.id)
-  end
-
-  def dislike
-    @article = Article.find(params[:id])
-    Dislike.create(user_id: current_user.id, article_id: @article.id)
   end
   
   def index(sorting = :id)
@@ -61,7 +79,7 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:title, :body, :status, :cover)
+      params.require(:article).permit(:title, :body, :status, :cover, :user_id)
     end
 
 end

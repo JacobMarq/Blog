@@ -4,8 +4,8 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="text-dark">
-      <%= form.label "Avi" %><br>
-      <%= form.file_field :avi %>
+      <%= f.label "Avi" %><br>
+      <%= f.file_field :avi %>
   </div>
   
   <div class="field">
@@ -23,7 +23,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password %> <i>(leave blank if you don't want to change your current password)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />

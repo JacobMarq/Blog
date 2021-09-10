@@ -16,8 +16,16 @@ class Article < ApplicationRecord
         !!self.likes.find{|like| like.user_id == user.id}
     end
 
+    def select_user_like(user)
+        like = !!self.likes.select{|like| return like if like.user_id == user.id}
+    end
+
     def disliked?(user)
-        !!self.dislikes.find{|dislike| like.user_id == user.id}
+        !!self.dislikes.find{|dislike| dislike.user_id == user.id}
+    end
+
+    def select_user_dislike(user)
+        dislike = !!self.dislikes.select{|dislike| return dislike if dislike.user_id == user.id}
     end
     
     def self.top_three(articles)

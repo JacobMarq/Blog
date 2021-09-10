@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+    before_action :authenticate_user!
+    
     def like
         @article = Article.find(params[:article_id])
         @comment = @article.comments.find(params[:id])
@@ -63,6 +65,6 @@ class CommentsController < ApplicationController
 
     private
         def comment_params
-            params.require(:comment).permit(:commenter, :body, :status, :subject_id)
+            params.require(:comment).permit(:body, :status, :subject_id, :user_id)
         end
 end

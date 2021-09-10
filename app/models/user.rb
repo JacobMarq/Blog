@@ -11,7 +11,8 @@ class User < ApplicationRecord
 
   has_many :likes
   has_many :dislikes
-  has_many :favorites, through: :user_articles, class_name: 'Article'
+  has_many :favorites, foreign_key: :article_id, class_name: 'UserArticle'
+
 
   has_many :followers, foreign_key: :follower_id, class_name: "Friendship"
   has_many :followed, through: :followers
