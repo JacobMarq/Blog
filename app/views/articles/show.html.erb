@@ -4,7 +4,6 @@
     <nav class="card-header navbar navbar-light bg-light">
         <h1 class="article_header mb-1 col-8 border-bottom"> <%= @article.title.capitalize %> </h1>
         <div class="d-flex col-md-3 align-self-start flex-row justify-content-end">
-            
             <% if @article.user == current_user %>
                 <%= link_to "", edit_article_path(@article),
                             :style => "font-size: 1.3rem; margin-right: 5px",
@@ -22,21 +21,35 @@
                             :data_bs_placement => "bottom",
                             :title => "Delete"%>
             <% else %>
-                <a class="bi bi-heart btn btn-primary btn-sm" style="font-size: 1.3rem; margin-right: 5px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Favorite"></a>
+                <% if @article.favorited_by?(current_user) %>
+                  <%= link_to "", unfavorite_article_path(@article),
+                            :class => "bi bi-heart-fill btn btn-primary btn-danger btn-sm",
+                            :style => "font-size: 1.3rem; margin-right: 5px",
+                            method: :delete,
+                            :data_bs_toggle =>"tooltip",
+                            :data_bs_placement => "bottom",
+                            :title => "Unfavorite"%>
+                <% else %>
+                  <%= link_to "", favorite_article_path(@article),
+                            :class => "bi bi-heart btn btn-primary btn-sm",
+                            :style => "font-size: 1.3rem; margin-right: 5px",
+                            method: :put,
+                            :data_bs_toggle =>"tooltip",
+                            :data_bs_placement => "bottom",
+                            :title => "Favorite"%>
+                <% end %>
             <% end %>
         </div>
+
         <div class="my-2 d-inline-flex align-bottom">
-                        
-            <% if @article.user.nil? %>
-                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2"%>
-            <% elsif @article.user.avi != nil %>
+            <% if @article.user != nil %>
                 <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2"%>
             <% else %>
                 <img src="<%= url_for(@article.user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 40px; width: 40px; aspect-ratio: 2/2">
             <% end %>
 
-            <div class="col-10 ms-3 align-self-center">
-                <p class="text-muted fs-6 mb-0"><%= @article.user.username.capitalize unless @article.user.nil? %></p>
+            <div class="col-10 align-self-center ms-0">
+                <a href="/users/<%= @article.user.id unless @article.user.nil? %>" class="w-auto text-decoration-none"><%= @article.user.username.capitalize if @article.user != nil && @article.user.username != nil %></a>
             </div>
         </div>
     </nav>
@@ -51,14 +64,29 @@
         <p> <%= @article.body.capitalize %> </p>
         
         <div>
-            <%= link_to ' ' + @article.likes.count.to_s, like_article_path( :id => @article.id),
-                        :class => "btn btn-sm bi bi-hand-thumbs-up",
-                        :style => "font-size: 1.3rem",
-                        :method => :put %>
-            <%= link_to ' ' + @article.dislikes.count.to_s, dislike_article_url(:id => @article.id),
-                        :class => "btn btn-sm bi bi-hand-thumbs-down",
-                        :style => "font-size: 1.3rem",
-                        :method => :put %>
+            <% if current_user.nil? || @article.liked?(current_user) === false %>
+                <%= link_to ' ' + @article.likes.count.to_s, like_article_path( :id => @article.id),
+                            :class => "btn btn-sm bi bi-hand-thumbs-up",
+                            :style => "font-size: 1.3rem",
+                            :method => :put %>
+            <% else %>
+                <%= link_to ' ' + @article.likes.count.to_s, like_article_path( :id => @article.id),
+                            :class => "btn btn-sm bi bi-hand-thumbs-up-fill",
+                            :style => "font-size: 1.3rem",
+                            :method => :put %>
+            <% end %>
+
+            <% if current_user.nil? || @article.disliked?(current_user) === false %>
+                <%= link_to ' ' + @article.dislikes.count.to_s, dislike_article_url(:id => @article.id),
+                            :class => "btn btn-sm bi bi-hand-thumbs-down",
+                            :style => "font-size: 1.3rem",
+                            :method => :put %>
+            <% else %>
+                <%= link_to ' ' + @article.dislikes.count.to_s, dislike_article_url(:id => @article.id),
+                            :class => "btn btn-sm bi bi-hand-thumbs-down-fill",
+                            :style => "font-size: 1.3rem",
+                            :method => :put %>
+            <% end %>
         </div>
     </div>
     

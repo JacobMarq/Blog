@@ -31,6 +31,14 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     UserArticle.create(user_id: current_user.id, article_id: @article.id)
   end
+
+  def unfavorite
+    @article = Article.find(params[:id])
+    @favorite = UserArticle.select{|favorite| favorite.user_id == current_user.id && favorite.article_id == @article.id}
+    @favorite.each do |fave|
+      fave.destroy
+    end
+  end
   
   def index(sorting = :id)
     @articles = Article.paginate(page: params[:page], per_page: 4)

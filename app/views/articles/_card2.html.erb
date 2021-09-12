@@ -15,14 +15,12 @@
         
         <% if article.user.nil? %>
             <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2"%>
-        <% elsif article.user.avi != nil %>
-            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2"%>
         <% else %>
             <img src="<%= url_for(article.user.avi) %>" class="border border-dark rounded-circle m-0" style="height: 40px; width: 40px; aspect-ratio: 2/2">
         <% end %>
 
         <div class="col-10 ms-3 align-self-center">
-            <p class="text-muted fs-6 mb-0"><%= article.user.username.capitalize unless article.user.nil? %></p>
+            <a href="/users/<%= article.user.id unless article.user.nil? %>" class="w-auto text-decoration-none text-muted"><%= article.user.username.capitalize if article.user != nil && article.user.username != nil %></a>
         </div>
     </div>
 </div>

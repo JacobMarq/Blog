@@ -8,15 +8,11 @@
                             :data_bs_toggle =>"tooltip",
                             :data_bs_placement => "bottom",
                             :title => "Edit"%>
-            <% else %>
-                <a class="bi bi-plus btn btn-primary btn-sm" style="font-size: 1.3rem; margin-right: 5px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Follow"> Follow</a>
             <% end %>
         </div>
 
         <div class="col-md-4 p-0 align-items-center d-flex justify-content-center">
             <% if @user.avi.nil? %>
-                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-3 me-3", :style => "height: 100px; width: 100px; aspect-ratio: 2/2"%>
-            <% elsif @user.avi != nil %>
                 <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-3 me-3", :style => "height: 100px; width: 100px; aspect-ratio: 2/2"%>
             <% else %>
                 <img src="<%= url_for(@user.avi) %>" class="border border-dark rounded-circle my-3 me-3" style="height: 100px; width: 100px; aspect-ratio: 2/2">
@@ -31,8 +27,27 @@
                     contact: <%= @user.email %>
                 </p>
                 <div class="row d-inline-block">
-                    <p>Following 0</p>
-                    <p>Followers 0</p>
+                    <p>Following <%= @user.follows.count %></p>
+                    <p>Followers <%= @user.followers.count %></p>
+                    <% if @user != current_user && current_user != nil %>
+                        <% if @user.followed?(current_user) %>
+                            <%= link_to ' Unfollow', unfollow_user_url(:id => @user.id),
+                                    :class => "bi bi-dash btn btn-danger float-end pe-3",
+                                    :style => "font-size: 1.3rem; margin-right: 5px",
+                                    :method => :put,
+                                    "data-bs-toggle" => "tooltip",
+                                    "data-bs-placement" =>"bottom",
+                                    :title => "Unfollow" %>
+                        <% else %>
+                            <%= link_to ' Follow', follow_user_url(:id => @user.id),
+                                    :class => "bi bi-plus btn btn-primary float-end pe-3",
+                                    :style => "font-size: 1.3rem; margin-right: 5px",
+                                    :method => :put, 
+                                    "data-bs-toggle" => "tooltip",
+                                    "data-bs-placement" =>"bottom",
+                                    :title => "Follow"%>
+                        <% end %>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -46,8 +61,7 @@
         <p><%= @user.username.capitalize %>'s Articles:</p>
     <% end %>
 
-    <% top_articles = Article.top_three(@user.articles) %>
-    <% top_articles.each do |article| %>
+    <% @user.articles.each do |article| %>
         <div class="row my-2">
             <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
         </div>
@@ -61,8 +75,7 @@
         <p><%= @user.username.capitalize %>'s Favorites:</p>
     <% end %>
     
-    <% top_favorites = Article.top_three(@user.favorites) %>
-    <% top_favorites.each do |favorite| %>
+    <% @user.favorites.each do |favorite| %>
         <div class="row my-2">
             <%= render( :partial => "articles/card", :locals => { :article => favorite } ) %>
         </div>

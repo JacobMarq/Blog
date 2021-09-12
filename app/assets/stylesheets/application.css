@@ -50,3 +50,11 @@ a.bi-heart {
 a.bi-heart:hover {
    color: #fff
 }
+
+a.bi-heart-fill {
+   color: rgb(184, 3, 3)
+}
+
+a.bi-heart-fill:hover {
+   color: #fff
+}

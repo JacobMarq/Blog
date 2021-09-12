@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_09_181818) do
+ActiveRecord::Schema.define(version: 2021_09_95_125909) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -76,11 +76,11 @@ ActiveRecord::Schema.define(version: 2021_09_09_181818) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "follower_id", null: false
-    t.integer "followed_id", null: false
+    t.integer "follows_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_id"], name: "index_friendships_on_followed_id"
     t.index ["follower_id"], name: "index_friendships_on_follower_id"
+    t.index ["follows_id"], name: "index_friendships_on_follows_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 2021_09_09_181818) do
   add_foreign_key "dislikes", "articles"
   add_foreign_key "dislikes", "comments"
   add_foreign_key "dislikes", "users"
-  add_foreign_key "friendships", "User", column: "followed_id"
-  add_foreign_key "friendships", "User", column: "follower_id"
+  add_foreign_key "friendships", "Users", column: "follower_id"
+  add_foreign_key "friendships", "Users", column: "follows_id"
   add_foreign_key "likes", "articles"
   add_foreign_key "likes", "comments"
   add_foreign_key "likes", "users"
