@@ -1,4 +1,6 @@
-<% @users = User.all %>
+<% followed.each do |user| %>
+<%= user.username %>
+<% end %>
 
 <p>Test Passed</p>
 <%= "welcome " + current_user.username %>

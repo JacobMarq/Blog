@@ -1,0 +1,15 @@
+<%= link_to " Back", :back, :class => "btn btn-primary btn-sm bi bi-box-arrow-left", :style => "margin-top: .7em; font-size: 1.3rem" %>
+
+<div class="card shadow">
+    <div class="card-header">
+        <h2 class="text-dark my-3">Followers:</h2>
+    </div>
+
+    <div class="card-body">
+        <div class="list-group list-group-flush">
+            <% @user.followers.each do |friendship| %>
+                <%= render( :partial => "users/card", :locals => { :user => friendship.follower } ) %>
+            <% end %>
+        </div>
+    </div>
+</div>

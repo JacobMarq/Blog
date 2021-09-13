@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get 'home/index'
   root "home#index"
 
+  get "/users/:id/following", to: "users#following", as: "user_following"
+  get "/users/:id/followers", to: "users#followers", as: "user_followers"
+
   put "/users/:id/follow", to: 'users#follow', as: 'follow_user'
   put "/users/:id/unfollow", to: 'users#unfollow', as: 'unfollow_user'
 

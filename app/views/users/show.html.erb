@@ -1,3 +1,5 @@
+<%= link_to " Back", :back, :class => "btn btn-primary btn-sm bi bi-box-arrow-left", :style => "margin-top: .7em; font-size: 1.3rem" %>
+
 <div class="card mb-3 shadow border-0 bg-light" style="display: inline-block">
     <div class="row no-gutters">
          
@@ -23,16 +25,18 @@
                 <h2 class="card-text" style="color: #222">
                     <%= @user.username.capitalize %>
                 </h2>
-                <p class="card-text">
+                <p class="card-text mb-2">
                     contact: <%= @user.email %>
                 </p>
-                <div class="row d-inline-block">
-                    <p>Following <%= @user.follows.count %></p>
-                    <p>Followers <%= @user.followers.count %></p>
-                    <% if @user != current_user && current_user != nil %>
+                <div class="row d-inline-block mb-3">
+                    <%= link_to "Following: " + @user.follows.count.to_s, user_following_path(@user), :method => :get, :class => "text-decoration-none link-primary" %>
+                    <%= link_to "Followers: " + @user.followers.count.to_s, user_followers_path(@user), :method => :get, :class => "text-decoration-none link-primary" %>
+                </div>
+                <div class="row ms-1">
+                <% if @user != current_user && current_user != nil %>
                         <% if @user.followed?(current_user) %>
                             <%= link_to ' Unfollow', unfollow_user_url(:id => @user.id),
-                                    :class => "bi bi-dash btn btn-danger float-end pe-3",
+                                    :class => "bi bi-dash btn btn-danger pe-3 w-auto",
                                     :style => "font-size: 1.3rem; margin-right: 5px",
                                     :method => :put,
                                     "data-bs-toggle" => "tooltip",
@@ -40,7 +44,7 @@
                                     :title => "Unfollow" %>
                         <% else %>
                             <%= link_to ' Follow', follow_user_url(:id => @user.id),
-                                    :class => "bi bi-plus btn btn-primary float-end pe-3",
+                                    :class => "bi bi-plus btn btn-primary pe-3 w-auto",
                                     :style => "font-size: 1.3rem; margin-right: 5px",
                                     :method => :put, 
                                     "data-bs-toggle" => "tooltip",

@@ -1,0 +1,39 @@
+<div class="list-group-item d-flex flex-row align-items-center p-0 my-1 position-relative">
+    <% if user != current_user && current_user != nil %>
+        <% if user.followed?(current_user) %>
+            <%= link_to ' Unfollow', unfollow_user_url(:id => user.id),
+                    :class => "bi bi-dash btn btn-danger end-0 pe-3 position-absolute",
+                    :style => "margin-right: 5px",
+                    :method => :put,
+                    "data-bs-toggle" => "tooltip",
+                    "data-bs-placement" =>"bottom",
+                    :title => "Unfollow" %>
+        <% else %>
+            <%= link_to ' Follow', follow_user_url(:id => user.id),
+                    :class => "bi bi-plus btn btn-primary end-0 pe-3 position-absolute",
+                    :style => "margin-right: 5px",
+                    :method => :put, 
+                    "data-bs-toggle" => "tooltip",
+                    "data-bs-placement" =>"bottom",
+                    :title => "Follow"%>
+        <% end %>
+    <% end %>
+
+    <% if user.avi.nil? %>
+        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
+    <% else %>
+        <img src="<%= url_for(user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+    <% end %>
+
+    <div class="col-md-10 flex-column">
+        <div class="h-25 d-flex flex-row mb-0 p-0">
+            <div class="row me-3">
+                <a href="/users/<%= user.id %>" class="w-auto text-decoration-none"><%= user.username.capitalize if user.username != nil %></a>
+            </div>
+        </div>
+
+        <p class="mb-0 text-black text-opacity-75">
+            <%= user.email %>
+        </p>
+    </div>
+</div>
