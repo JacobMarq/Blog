@@ -14,7 +14,7 @@
         </div>
 
         <div class="col-md-4 p-0 align-items-center d-flex justify-content-center">
-            <% if @user.avi.attached? == false %>
+            <% if @user.avi.attached? == false || @user.avi.attached? %>
                 <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-3 me-3", :style => "height: 100px; width: 100px; aspect-ratio: 2/2"%>
             <% else %>
                 <%= image_tag @user.avi.url, :class => "border border-dark rounded-circle my-3 me-3", :style => "height: 100px; width: 100px; aspect-ratio: 2/2"%>

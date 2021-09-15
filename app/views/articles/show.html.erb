@@ -50,13 +50,14 @@
         </div>
 
         <div class="my-2 d-inline-flex align-bottom">
+            
             <% if @article.user.nil? %>
-                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2"%>
-            <% elsif @article.user.avi.attached? %>
-                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2"%>
+                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
+            <% elsif @article.user.avi.attached? || @article.user.avi.attached? == false %>
+                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
             <% else %>
                 <img src="<%= url_for(@article.user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 40px; width: 40px; aspect-ratio: 2/2">
-            <% end %>
+            <% end > %>
 
             <div class="col-10 align-self-center ms-0">
                 <a href="/users/<%= @article.user.id unless @article.user.nil? %>" class="w-auto text-decoration-none"><%= @article.user.username.capitalize if @article.user != nil && @article.user.username != nil %></a>
@@ -64,11 +65,25 @@
         </div>
     </nav>
     
-    <% if @article.cover.attached? %>
-        <img src="<%= url_for(@article.cover) %>" class="card-img my-0 mw-100" alt="cover">
-    <% else %>
+    <% i = rand(0...4) %>
+        <% case i %>
+        <% when i = 0 %>
+            <%= image_tag "art-forest-example.jpg", :class => "card-img my-0 mw-100" %>
+        <% when i = 1 %>
+            <%= image_tag "car-example.jpg", :class => "card-img my-0 mw-100" %>
+        <% when i = 2 %>
+            <%= image_tag "city-example.jpeg", :class => "card-img my-0 mw-100" %>
+        <% when i = 3 %>
+            <%= image_tag "forest-example.jpeg", :class => "card-img my-0 mw-100" %>
+        <% when i = 4 %>
+            <%= image_tag "wildfire-example.jpg", :class => "card-img my-0 mw-100" %>
+        <% end %>
+    
+    <%# <% if @article.cover.attached? >
+        <img src="<%= url_for(@article.cover) >" class="card-img my-0 mw-100" alt="cover">
+    <% else >
         <p class="text-muted d-block my-0"></p>
-    <% end %>
+    <% end > %>
 
     <div class="card-body text-dark">
         <p> <%= @article.body.capitalize %> </p>
