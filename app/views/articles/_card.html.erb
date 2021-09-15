@@ -1,6 +1,6 @@
 <div class="card mb-3 shadow border-0 bg-light" style="display: inline-block">
     <div class="row no-gutters">
-        <div class="col-md-4 p-0 align-items-center d-flex justify-content-center">
+        <div class="col-md-4 p-0 align-items-center justify-content-center">
             <% if article.cover.attached? === false || article.cover.attached? %>
                 <a href="/articles/<%= article.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
                     <% i = rand(0...4) %>
@@ -22,7 +22,7 @@
                 <p class="text-muted d-block my-0">No photo to load...</p>
             <% end %>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 d-flex flex-column justify-content-space-between">
             <div class="card-body">
                 <a href="/articles/<%= article.id %>" class="fs-5 text-decoration-none fw-bold title-link">
                     <%= article.title.capitalize %>
@@ -32,7 +32,7 @@
                 </p>
                 <%= link_to 'Read more...', article, :class => "title-link text-decoration-none" %>
             </div>
-            <div class="card-footer">
+            <div class="card-footer bg-light">
                 <small class="text-muted">
                     <%= 'last updated ' + article.updated_at.pretty %>
                 </small>
