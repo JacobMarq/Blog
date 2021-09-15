@@ -1,4 +1,4 @@
-<div class="list-group-item d-flex flex-row align-items-center p-0 my-1 position-relative">
+<div class="list-group-item d-flex flex-row align-items-center p-0 my-3 position-relative">
     <% if user != current_user && current_user != nil %>
         <% if user.followed?(current_user) %>
             <%= link_to ' Unfollow', unfollow_user_url(:id => user.id),
