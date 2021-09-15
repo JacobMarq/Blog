@@ -2,16 +2,16 @@
 <% else %>
 
 <div class="col-md-8 float-md-start">
-    <% if article.cover.attached? %>
+    <% if article.cover.attached? || if article.cover.attached? == false %>
         <a href="/articles/<%= article.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
             <% i = rand(0...4) %>
             <% case i %>
             <% when i = 0 %>
                 <%= image_tag "art-forest-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
             <% when i = 1 %>
-                <%= image_tag "car-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
+                <%= image_tag "Car-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
             <% when i = 2 %>
-                <%= image_tag "city-example.jpeg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
+                <%= image_tag "City-example.jpeg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
             <% when i = 3 %>
                 <%= image_tag "forest-example.jpeg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
             <% when i = 4 %>
