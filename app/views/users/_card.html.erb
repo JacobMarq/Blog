@@ -19,7 +19,7 @@
         <% end %>
     <% end %>
 
-    <% if user.avi.nil? %>
+    <% if @user.avi.attached? == false %>
         <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
     <% else %>
         <img src="<%= url_for(user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">

@@ -7,7 +7,7 @@
 
     <div class="card-body">
         <div class="list-group list-group-flush">
-            <% @user.followers.each do |friendship| %>
+            <% @user.followers.includes(:follower).each do |friendship| %>
                 <%= render( :partial => "users/card", :locals => { :user => friendship.follower } ) %>
             <% end %>
         </div>
