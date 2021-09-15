@@ -6,7 +6,7 @@
   </div>
   <div class="card-body">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= render "devise/shared/error_messages", resource: resource, :class => "text-dark" %>
 
       <%# <div class="text-dark my-2">
           <%= f.label "Avi" ><br>
