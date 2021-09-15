@@ -2,7 +2,7 @@
 <% else %>
 
 <div class="col-md-8 float-md-start">
-    <% if article.cover.attached? || if article.cover.attached? == false %>
+    <% if article.cover.attached? || article.cover.attached? == false %>
         <a href="/articles/<%= article.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
             <% i = rand(0...4) %>
             <% case i %>
