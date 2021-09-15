@@ -3,7 +3,7 @@
 <% @articles = Article.paginate(page: params[:page], per_page: 4).order('created_at DESC') %>
 <% temp_articles = @articles %>
 
-<% if @articles.current_page == 1 %>
+<% if @articles.current_page == 1 && @articles != nil %>
   <div class="d-flex justify-content-center">
     <div class="border-bottom">
         <h1 class="text-center text-dark">Most Recent</h1>
@@ -20,7 +20,11 @@
 
 <% temp_articles.each do |article| %>
     <div class="row justify-content-center mt-2">
-      <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
+      <% if @articles.nil? %>
+        <% "No articles to render" %>
+      <% else %>
+        <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
+      <% end %>
     </div>
 <% end %>
 
