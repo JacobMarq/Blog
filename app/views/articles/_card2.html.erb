@@ -31,7 +31,7 @@
         
         <% if article.user.nil? %>
             <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
-        <% elsif @article.user.avi.attached? || @article.user.avi.attached? == false %>
+        <% elsif article.user.avi.attached? || article.user.avi.attached? == false %>
             <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
         <% else %>
             <img src="<%= url_for(article.user.avi) %>" class="border border-dark rounded-circle m-0" style="height: 40px; width: 40px; aspect-ratio: 2/2">
