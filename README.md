@@ -1,6 +1,13 @@
 # The Blog-Spot
 
-A blog app with user accounts that have liking, disliking, favoriting, and following functionality.
+A blog app with Devise User Authentication
+     
+     User accounts can 
+      -post articles/comments
+      -like articles/comments
+      -dislike articles/comments
+      -favorite articles
+      -follow users
 
 Ruby version ~3.0.0
 
