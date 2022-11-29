@@ -24,3 +24,6 @@ Integrate 3rd party microservices to a rails app
 Utilize user authentication
 
 develop my experience with PostgreSQL
+
+
+### Projet completed: Sep 2021
