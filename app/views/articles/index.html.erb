@@ -3,33 +3,35 @@
 <% @articles = Article.paginate(page: params[:page], per_page: 4).order('created_at DESC') %>
 <% temp_articles = @articles %>
 
-<% if @articles.current_page == 1 && @articles != nil %>
-  <div class="d-flex justify-content-center">
-    <div class="border-bottom">
-        <h1 class="text-center text-dark">Most Recent</h1>
+<% if temp_articles.length < 1 %>
+  <p class="text-center text-dark"> No articles to render... </p>
+<% else %>
+  <% if temp_articles.current_page == 1 %>
+    <div class="d-flex justify-content-center">
+      <div class="border-bottom">
+          <h1 class="text-center text-dark">Most Recent</h1>
+      </div>
     </div>
-  </div>
-  <div class="row py-3 border-bottom">
-    <div class="shadow p-0 mb-4">
-      <%= render( :partial => "articles/card2", :locals => { :article => temp_articles[0] } ) %>
+    <div class="row py-3 border-bottom">
+      <div class="shadow p-0 mb-4">
+        <%= render( :partial => "articles/card2", :locals => { :article => temp_articles[0] } ) %>
+      </div>
     </div>
-  </div>
+  <% end %>
+
+  <% temp_articles = temp_articles.drop(1) if @articles.current_page == 1 %>
+
+  <% if temp_articles.length > 0 %>
+    <% temp_articles.each do |article| %>
+      <div class="row justify-content-center mt-2">
+      <%= render( :partial => "articles/card", :locals => { :article => article } ) %>    </div>
+    <% end %>
+    <br>
+  <% end %>
+
+  <p class="text-center text-muted" style="margin-bottom: .2em"><%= page_entries_info @articles %></p>
+  <%= will_paginate @article, list_classes: %w(custom_pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 <% end %>
-
-<% temp_articles = temp_articles.drop(1) if @articles.current_page == 1 %>
-
-<% temp_articles.each do |article| %>
-    <div class="row justify-content-center mt-2">
-      <% if article.nil? %>
-        <% "No articles to render" %>
-      <% else %>
-        <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
-      <% end %>
-    </div>
-<% end %>
-
-<p class="text-center text-muted" style="margin-bottom: .2em"><%= page_entries_info @articles %></p>
-<%= will_paginate @article, list_classes: %w(custom_pagination justify-content-center), renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 
 <div class="d-flex gap-2 justify-content-center">
     <%= button_to "Create New Article", new_article_path,

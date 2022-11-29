@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 2021_09_95_125909) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.integer "follower_id", null: false
-    t.integer "follows_id", null: false
+    t.integer "follower_id"
+    t.integer "follows_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["follower_id"], name: "index_friendships_on_follower_id"
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 2021_09_95_125909) do
   add_foreign_key "dislikes", "articles"
   add_foreign_key "dislikes", "comments"
   add_foreign_key "dislikes", "users"
-  add_foreign_key "friendships", "Users", column: "follower_id"
-  add_foreign_key "friendships", "Users", column: "follows_id"
+  add_foreign_key "friendships", "users", column: "follower_id"
+  add_foreign_key "friendships", "users", column: "follows_id"
   add_foreign_key "likes", "articles"
   add_foreign_key "likes", "comments"
   add_foreign_key "likes", "users"

@@ -1,7 +1,11 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
     
     <div class="d-flex flex-row align-items-start p-0 mt-1">
-        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle me-auto", :style => "height: 60px; width: 60px; aspect-ratio: 2/2" %>
+        <% if current_user.nil? || current_user.avi.nil? %>
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle me-auto", :style => "height: 60px; width: 60px; aspect-ratio: 2/2" %>
+        <% else %>
+            <img src="<%= url_for(current_user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+        <% end %>
         
         <p class="col-10 d-flex flex-column">
             <% if comment.subject_id.nil? %>

@@ -14,7 +14,7 @@
         </div>
 
         <div class="col-md-4 p-0 align-items-center d-flex justify-content-center">
-            <% if @user.avi.attached? == false || @user.avi.attached? %>
+            <% if !@user.avi.attached? %>
                 <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-3 me-3", :style => "height: 100px; width: 100px; aspect-ratio: 2/2"%>
             <% else %>
                 <%= image_tag @user.avi.url, :class => "border border-dark rounded-circle my-3 me-3", :style => "height: 100px; width: 100px; aspect-ratio: 2/2"%>
@@ -64,10 +64,16 @@
     <% else %>
         <p><%= @user.username.capitalize %>'s Articles:</p>
     <% end %>
-
-    <% @user.articles.each do |article| %>
-        <div class="row justify-content-center mt-2">
-            <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
+    
+    <% if @user.articles.length > 0 %>
+        <% @user.articles.each do |article| %>
+            <div class="row justify-content-center mt-2">
+                <%= render( :partial => "articles/card", :locals => { :article => article } ) %>
+            </div>
+        <% end %>
+    <% else %>
+        <div class="card-body">
+            <p class="mt-2"> You have not written any articles.. </p>
         </div>
     <% end %>
 </div>
@@ -79,9 +85,15 @@
         <p><%= @user.username.capitalize %>'s Favorites:</p>
     <% end %>
     
-    <% @user.favorites.each do |favorite| %>
-        <div class="row justify-content-center mt-2">
-            <%= render( :partial => "articles/card", :locals => { :article => favorite } ) %>
+    <% if @user.favorites.length > 0 %>
+        <% @user.favorites.each do |favorite| %>
+            <div class="row justify-content-center mt-2">
+                <%= render( :partial => "articles/card", :locals => { :article => favorite } ) %>
+            </div>
+        <% end %>
+    <% else %>
+        <div class="card-body">
+            <p class="mt-2"> You have not favorited any articles... </p>
         </div>
     <% end %>
 </div>

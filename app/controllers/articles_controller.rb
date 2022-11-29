@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
           @dislike.destroy
       end
       Like.create(user_id: current_user.id, article_id: @article.id)
+      redirect_to @article
   end
   
   def dislike
@@ -25,11 +26,13 @@ class ArticlesController < ApplicationController
           @like.destroy
       end
       Dislike.create(user_id: current_user.id, article_id: @article.id)
+      redirect_to @article
   end
   
   def favorite
     @article = Article.find(params[:id])
     UserArticle.create(user_id: current_user.id, article_id: @article.id)
+    redirect_to @article
   end
 
   def unfavorite

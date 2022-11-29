@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
             @dislike.destroy
         end
         Like.create(user_id: current_user.id, comment_id: @comment.id)
+        redirect_to article_path(@article)
     end
     
     def dislike
@@ -27,6 +28,7 @@ class CommentsController < ApplicationController
             @like.destroy
         end
         Dislike.create(user_id: current_user.id, comment_id: @comment.id)
+        redirect_to article_path(@article)
     end
     
     def create

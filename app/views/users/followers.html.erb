@@ -7,8 +7,14 @@
 
     <div class="card-body">
         <div class="list-group list-group-flush">
-            <% @user.followers.includes(:follower).each do |friendship| %>
-                <%= render( :partial => "users/card", :locals => { :user => friendship.follower } ) %>
+            <br>
+            <% followers = @user.followers.includes(:follower) %>
+            <% if followers.length < 1 %>
+                <p>You do not have any followers...</p>
+            <% else %>
+                <% followers.each do |friendship| %>
+                    <%= render( :partial => "users/card", :locals => { :user => friendship.follower } ) %>
+                <% end %>
             <% end %>
         </div>
     </div>

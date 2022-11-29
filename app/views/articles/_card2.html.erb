@@ -2,22 +2,9 @@
 <% else %>
 
 <div class="col-md-8 float-md-start">
-    <% if article.cover.attached? || article.cover.attached? == false %>
+    <% if article.cover.attached? %>
         <a href="/articles/<%= article.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
-            <% i = rand(0...4) %>
-            <% case i %>
-            <% when i = 0 %>
-                <%= image_tag "art-forest-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
-            <% when i = 1 %>
-                <%= image_tag "Car-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
-            <% when i = 2 %>
-                <%= image_tag "City-example.jpeg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
-            <% when i = 3 %>
-                <%= image_tag "forest-example.jpeg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
-            <% when i = 4 %>
-                <%= image_tag "wildfire-example.jpg", :class => "d-block my-0 w-100 mw-100 rounded-3", :style => "aspect-ratio: 16/9" %>
-            <% end %>
-            <%# <img src="<%= url_for(article.cover) >" class="d-block my-0 w-100 mw-100 rounded-3" style="aspect-ratio: 16/9"> %>
+            <img src="<%= url_for(article.cover) %>" class="d-block my-0 w-100 mw-100 rounded-3" style="aspect-ratio: 16/9">
         </a>
     <% else %>
         <p class="text-muted d-block h-100 w-100 text-center">No photo to load...</p>
@@ -31,7 +18,7 @@
         
         <% if article.user.nil? %>
             <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
-        <% elsif article.user.avi.attached? || article.user.avi.attached? == false %>
+        <% elsif !article.user.avi.attached? %>
             <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
         <% else %>
             <img src="<%= url_for(article.user.avi) %>" class="border border-dark rounded-circle m-0" style="height: 40px; width: 40px; aspect-ratio: 2/2">

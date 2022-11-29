@@ -1,22 +1,9 @@
 <div class="card mb-3 shadow border-0 bg-light" style="display: inline-block">
     <div class="row no-gutters">
         <div class="col-md-4 p-0 align-items-center justify-content-center">
-            <% if article.cover.attached? === false || article.cover.attached? %>
+            <% if article.cover.attached? %>
                 <a href="/articles/<%= article.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
-                    <% i = rand(0...4) %>
-                    <% case i %>
-                    <% when i = 0 %>
-                        <%= image_tag "art-forest-example.jpg", :class => "card-img mw-100 h-100 my-0 rounded border" %>
-                    <% when i = 1 %>
-                        <%= image_tag "Car-example.jpg", :class => "card-img mw-100 h-100 my-0 rounded border" %>
-                    <% when i = 2 %>
-                        <%= image_tag "City-example.jpeg", :class => "card-img mw-100 h-100 my-0 rounded border" %>
-                    <% when i = 3 %>
-                        <%= image_tag "forest-example.jpeg", :class => "card-img mw-100 h-100 my-0 rounded border" %>
-                    <% when i = 4 %>
-                        <%= image_tag "wildfire-example.jpg", :class => "card-img mw-100 h-100 my-0 rounded border" %>
-                    <% end %>
-                    <%# <img src="<%= url_for(article.cover) >" class="card-img mw-100 h-100 my-0 rounded border" alt="cover"> %>
+                    <img src="<%= url_for(article.cover) %>" class="card-img mw-100 h-100 my-0 rounded border" alt="cover">
                 </a>
             <% else %>
                 <p class="text-muted d-block my-0">No photo to load...</p>
