@@ -1,6 +1,7 @@
 # The Blog-Spot
 
-      User accounts can 
+      Users can
+
             -create articles & comments
             -like articles & comments
             -dislike articles & comments
@@ -13,3 +14,7 @@ Rails version ~ 6.1.4
 
 Avoid ffi_c not found error:
 gem install ffi --version '1.15.5' -- --disable-system-libffi
+
+
+This project helped me to learn how to:
+      integrate 3rd party microservices to a rails app.
