@@ -26,4 +26,4 @@ Utilize user authentication
 develop my experience with PostgreSQL
 
 
-### Projet completed: Sep 2021
+### Project completed: Sep 2021
