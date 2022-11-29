@@ -1,11 +1,11 @@
 # The Blog-Spot
 
-User accounts can 
-      -create articles & comments
-      -like articles & comments
-      -dislike articles & comments
-      -favorite articles
-      -follow other users
+      User accounts can 
+            -create articles & comments
+            -like articles & comments
+            -dislike articles & comments
+            -favorite articles
+            -follow other users
 
 Ruby version ~3.0.2
 
