@@ -17,7 +17,7 @@
         <% if @articles.length < 3 %>
             <p> No articles to render... </p>
         <% else %>
-            <div class="shadow" style="max-height: 450px !important; max-width: 1100px !important">
+            <div id="carousel-wrap" class="shadow" style="max-height: 450px !important; max-width: 1100px !important;">
                 <%= render( :partial => "home/carousel", :locals => { :articles => @articles } )%>
             </div>
         <% end %>

@@ -14,6 +14,18 @@
  *= require_self
  */
 
+@media (min-width: 1100px) {
+   #carousel-wrap {
+      width: 1100px;
+   }
+}
+
+@media (max-width: 1100px) {
+   #carousel-wrap {
+      width: 100%;
+   }
+}
+
 .article_header {
    color: #000
 }

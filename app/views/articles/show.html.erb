@@ -2,54 +2,56 @@
     
 <div class="card border-0 shadow">
     <nav class="card-header navbar navbar-light bg-light">
-        <h1 class="article_header mb-1 col-8 border-bottom"> <%= @article.title.capitalize %> </h1>
-        <div class="d-flex col-md-3 align-self-start flex-row justify-content-end">
-            <% if @article.user == current_user %>
-                <%= link_to "", edit_article_path(@article),
-                            :style => "font-size: 1.3rem; margin-right: 5px",
-                            :class => "btn btn-primary btn-sm bi bi-pencil-square",
-                            :data_bs_toggle =>"tooltip",
-                            :data_bs_placement => "bottom",
-                            :title => "Edit"%>
+        <div class="d-flex w-100 flex-row">
+            <h1 class="article_header mb-1 col-8 border-bottom"> <%= @article.title.capitalize %> </h1>
+            <div class="d-flex ms-auto align-self-start flex-row justify-content-end">
+                <% if @article.user == current_user %>
+                    <%= link_to "", edit_article_path(@article),
+                                :style => "font-size: 1.3rem; margin-right: 5px",
+                                :class => "btn btn-primary btn-sm bi bi-pencil-square",
+                                :data_bs_toggle =>"tooltip",
+                                :data_bs_placement => "bottom",
+                                :title => "Edit"%>
 
-                <%= link_to "", article_path(@article),
-                            :class => "btn btn-primary btn-sm btn-danger bi bi-trash",
-                            :style => "font-size: 1.3rem",
-                            method: :delete,
-                            data: { confirm: "Are you sure?" },
-                            :data_bs_toggle =>"tooltip",
-                            :data_bs_placement => "bottom",
-                            :title => "Delete"%>
-            <% else %>
-                <% if current_user.nil? %>
-                  <%= link_to "", favorite_article_path(@article),
-                            :class => "bi bi-heart btn btn-primary btn-sm",
-                            :style => "font-size: 1.3rem; margin-right: 5px",
-                            method: :put,
-                            :data_bs_toggle =>"tooltip",
-                            :data_bs_placement => "bottom",
-                            :title => "Favorite"%>
-                <% elsif @article.favorited_by?(current_user) %>
-                    <%= link_to "", unfavorite_article_path(@article),
-                            :class => "bi bi-heart-fill btn btn-primary btn-danger btn-sm",
-                            :style => "font-size: 1.3rem; margin-right: 5px",
-                            method: :delete,
-                            :data_bs_toggle =>"tooltip",
-                            :data_bs_placement => "bottom",
-                            :title => "Unfavorite"%>
+                    <%= link_to "", article_path(@article),
+                                :class => "btn btn-primary btn-sm btn-danger bi bi-trash",
+                                :style => "font-size: 1.3rem",
+                                method: :delete,
+                                data: { confirm: "Are you sure?" },
+                                :data_bs_toggle =>"tooltip",
+                                :data_bs_placement => "bottom",
+                                :title => "Delete"%>
                 <% else %>
-                  <%= link_to "", favorite_article_path(@article),
-                            :class => "bi bi-heart btn btn-primary btn-sm",
-                            :style => "font-size: 1.3rem; margin-right: 5px",
-                            method: :put,
-                            :data_bs_toggle =>"tooltip",
-                            :data_bs_placement => "bottom",
-                            :title => "Favorite"%>
+                    <% if current_user.nil? %>
+                    <%= link_to "", favorite_article_path(@article),
+                                :class => "bi bi-heart btn btn-primary btn-sm",
+                                :style => "font-size: 1.3rem; margin-right: 5px",
+                                method: :put,
+                                :data_bs_toggle =>"tooltip",
+                                :data_bs_placement => "bottom",
+                                :title => "Favorite"%>
+                    <% elsif @article.favorited_by?(current_user) %>
+                        <%= link_to "", unfavorite_article_path(@article),
+                                :class => "bi bi-heart-fill btn btn-primary btn-danger btn-sm",
+                                :style => "font-size: 1.3rem; margin-right: 5px",
+                                method: :delete,
+                                :data_bs_toggle =>"tooltip",
+                                :data_bs_placement => "bottom",
+                                :title => "Unfavorite"%>
+                    <% else %>
+                    <%= link_to "", favorite_article_path(@article),
+                                :class => "bi bi-heart btn btn-primary btn-sm",
+                                :style => "font-size: 1.3rem; margin-right: 5px",
+                                method: :put,
+                                :data_bs_toggle =>"tooltip",
+                                :data_bs_placement => "bottom",
+                                :title => "Favorite"%>
+                    <% end %>
                 <% end %>
-            <% end %>
+            </div>
         </div>
 
-        <div class="my-2 d-inline-flex align-bottom">
+        <div class="my-2 d-inline-flex align-bottom flex-row">
             
             <% if @article.user.nil? %>
                 <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 40px; min-width: 40px; aspect-ratio: 2/2" %>
@@ -66,7 +68,7 @@
     </nav>
     
     <% if @article.cover.attached? %>
-        <img src="<%= url_for(@article.cover) %>" class="card-img my-0 mw-100" style="object-fit: cover;" alt="cover">
+        <img src="<%= url_for(@article.cover) %>" class="card-img my-0 mw-100" style="object-fit: contain; max-height: 800px;" alt="cover">
     <% else %>
         <p class="text-muted d-block my-0"></p>
     <% end %>
