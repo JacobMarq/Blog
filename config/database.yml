@@ -26,5 +26,5 @@ production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: blog_production
   username: blog
-  password: <%= ENV["BLOG_DATABASE_PASSWORD"]
+  password: <%= ENV["BLOG_DATABASE_PASSWORD"] %>
   url: <%= ENV["BLOG_DATABASE_URL"] %>
