@@ -27,3 +27,4 @@ production:
   database: blog_production
   username: blog
   password: <%= ENV["BLOG_DATABASE_PASSWORD"]
+  url: <%= ENV["MY_APP_DATABASE_URL"] %>
