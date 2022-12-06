@@ -4,7 +4,7 @@
 <div class="col-md-8 float-md-start">
     <% if article.cover.attached? %>
         <a href="/articles/<%= article.id %>" data-bs-toggle="tooltip" data-bs-placement="top" title="View article">
-            <img src="<%= url_for(article.cover) %>" class="d-block my-0 w-100 mw-100 rounded-3" style="aspect-ratio: 16/9">
+            <img src="<%= url_for(article.cover) %>" class="d-block my-0 w-100 mw-100 rounded-3" style="aspect-ratio: 16/9; object-fit: fill;">
         </a>
     <% else %>
         <p class="text-muted d-block h-100 w-100 text-center">No photo to load...</p>
@@ -17,11 +17,11 @@
     <div class="d-flex my-3">
         
         <% if article.user.nil? %>
-            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-0", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
-        <% elsif !article.user.avi.attached? %>
-            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle m-auto me-3", :style => "height: 40px; min-width: 40px; aspect-ratio: 2/2" %>
+        <% elsif !article.user.avi.attached? || article.user.avi.nil? %>
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 40px; min-width: 40px; aspect-ratio: 2/2" %>
         <% else %>
-            <img src="<%= url_for(article.user.avi) %>" class="border border-dark rounded-circle m-0" style="height: 40px; width: 40px; aspect-ratio: 2/2">
+            <%= cl_image_tag article.user.avi.url, :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 40px; min-width: 40px; object-fit: cover;"%>
         <% end %>
 
         <div class="col-10 ms-3 align-self-center">

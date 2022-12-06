@@ -52,11 +52,11 @@
         <div class="my-2 d-inline-flex align-bottom">
             
             <% if @article.user.nil? %>
-                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
-            <% elsif !@article.user.avi.attached? %>
-                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 40px; width: 40px; aspect-ratio: 2/2" %>
+                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 40px; min-width: 40px; aspect-ratio: 2/2" %>
+            <% elsif !@article.user.avi.attached? || @article.user.avi.nil?%>
+                <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 40px; min-width: 40px; aspect-ratio: 2/2" %>
             <% else %>
-                <img src="<%= url_for(@article.user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 40px; width: 40px; aspect-ratio: 2/2">
+                <%= cl_image_tag @article.user.avi.url, :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 40px; min-width: 40px; object-fit: cover;"%>
             <% end %>
 
             <div class="col-10 align-self-center ms-0">
@@ -66,7 +66,7 @@
     </nav>
     
     <% if @article.cover.attached? %>
-        <img src="<%= url_for(@article.cover) %>" class="card-img my-0 mw-100" alt="cover">
+        <img src="<%= url_for(@article.cover) %>" class="card-img my-0 mw-100" style="object-fit: cover;" alt="cover">
     <% else %>
         <p class="text-muted d-block my-0"></p>
     <% end %>

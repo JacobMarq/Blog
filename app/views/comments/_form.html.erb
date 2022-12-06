@@ -1,13 +1,13 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
     
-    <div class="d-flex flex-row align-items-start p-0 mt-1">
+    <div class="d-flex flex-row align-items-start p-0 my-2">
         <% if current_user.nil? || current_user.avi.nil? %>
-            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle me-auto", :style => "height: 60px; width: 60px; aspect-ratio: 2/2" %>
+            <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 60px; min-width: 60px; aspect-ratio: 2/2" %>
         <% else %>
-            <img src="<%= url_for(current_user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+            <%= cl_image_tag current_user.avi.url, :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 60px; min-width: 60px; object-fit: cover;"%>
         <% end %>
 
-        <p class="col-10" style="display: flex; flex-direction: column">
+        <p class="d-flex flex-column" style="width: 100%;">
             <%= form.text_area :body, :placeholder => 'Add a comment...' %>
         </p>
     </div>

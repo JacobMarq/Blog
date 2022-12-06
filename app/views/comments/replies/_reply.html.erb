@@ -1,4 +1,4 @@
-<div class="d-flex flex-row align-items-start p-0 my-1 position-relative">
+<div class="d-flex flex-row align-items-start p-0 my-2 position-relative">
     <% if comment.user == current_user %>
         <%= link_to '', [comment.article, comment],
                             :class => "position-absolute top-0 end-0 btn btn-primary btn-sm btn-danger bi bi-trash",
@@ -11,14 +11,14 @@
     <% end %>
 
     <% if comment.user.nil? %>
-        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
-    <% elsif !comment.user.avi.attached? %>
-        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
+        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-2 me-3", :style => "height: 60px; min-width: 60px; aspect-ratio: 2/2"%>
+    <% elsif !comment.user.avi.attached? || comment.user.avi.nil? %>
+        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-2 me-3", :style => "height: 60px; min-width: 60px; aspect-ratio: 2/2"%>
     <% else %>
-        <img src="<%= url_for(comment.user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+        <%= cl_image_tag comment.user.avi.url, :class => "border border-dark rounded-circle my-2 me-3", :style => "height: 60px; min-width: 60px; object-fit: cover;"%>
     <% end %>
 
-    <div class="col-md-10 flex-column">
+    <div class="flex-column">
         <div class="h-25 d-flex flex-row mb-0 p-0">
             <div class="row me-3">
                 <a href="/users/<%= comment.user.id unless comment.user.nil? %>" class="w-auto text-decoration-none"><%= comment.user.username.capitalize if comment.user != nil && comment.user.username != nil %></a>
@@ -53,9 +53,9 @@
 
             <button class="btn btn-link btn-block text-left text-decoration-none collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#reply<%= comment.id %>" aria-expanded="false" aria-controls="reply<%= comment.id %>">Reply</button>
         </div>
-
-        <div id="reply<%= comment.id %>" class="collapse" aria-labelledby="comment<%= comment.id %>" data-parent="#commentAccordion">
-            <%= render "comments/replies/form", comment: comment %>
-        </div>
     </div>
+</div>
+
+<div id="reply<%= comment.id %>" class="collapse ms-auto me-auto" aria-labelledby="comment<%= comment.id %>" data-parent="#commentAccordion" style="width: 90%">
+    <%= render "comments/replies/form", comment: comment %>
 </div>

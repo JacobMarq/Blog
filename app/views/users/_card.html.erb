@@ -19,10 +19,10 @@
         <% end %>
     <% end %>
 
-    <% if !@user.avi.attached? %>
-        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-0 me-3", :style => "height: 60px; width: 60px; aspect-ratio: 2/2"%>
+    <% if !user.avi.attached? || user.avi.url.nil? %>
+        <%= image_tag "avatar-none.png", :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 60px; min-width: 60px; aspect-ratio: 2/2"%>
     <% else %>
-        <img src="<%= url_for(user.avi) %>" class="border border-dark rounded-circle my-0 me-3" style="height: 60px; width: 60px; aspect-ratio: 2/2">
+        <%= cl_image_tag user.avi.url, :class => "border border-dark rounded-circle my-auto me-3", :style => "height: 60px; min-width: 60px; object-fit: cover;"%>
     <% end %>
 
     <div class="col-md-10 flex-column">
